@@ -1,0 +1,2 @@
+# Equity-API
+Currencies API
