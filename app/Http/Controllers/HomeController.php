@@ -15,6 +15,13 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function compare($id)
+    {
+        $currency_php = Currency::find($id);
+
+        return view('chart', ['currency_php' => $currency_php]);
+    }
+
     public function upload()
     {
         return view('upload');
@@ -22,14 +29,9 @@ class HomeController extends Controller
 
     public function addprice($id)
     {
-        $currency = Currency::find($id);
+        $currency_php = Currency::find($id);
 
-        return view('addprice', ['currency' => $currency]);
-    }
-
-    public function chart()
-    {
-        return view('chart');
+        return view('addprice', ['currency_php' => $currency_php]);
     }
 
     public function admin()

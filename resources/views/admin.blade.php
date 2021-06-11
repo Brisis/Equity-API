@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" id="admin">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
@@ -28,7 +28,8 @@
                           <td>@{{ currency.country }}</td>
                           <td>@{{ currency.iso_code }}</td>
                           <td>
-                            <a class="badge badge-primary"  v-bind:href="'/add-price/'+ currency.id">Add New Price</a>
+                            <a class="badge badge-primary" v-bind:href="'/addprice/'+ currency.id">Add New Price</a>
+                            <a class="badge badge-primary" v-bind:href="'/currencies/'+ currency.id">Get Currency</a>
                             <a class="badge badge-danger" href="/delete">Delete</a>
                           </td>
                         </tr>
@@ -38,4 +39,5 @@
         </div>
     </div>
 </div>
+<script src="{{ URL::to('js/admin.js') }}"></script>
 @endsection

@@ -25,11 +25,14 @@ Route::get('/currencies', [CurrencyController::class, 'index']);
 Route::get('/curuser', [LoginController::class, 'getuser']);
 Route::get('/currencies/{id}', [CurrencyController::class, 'show']);
 Route::get('/pair/{name}', [CurrencyController::class, 'getpairs']);
+Route::get('/getcurrency/{id}', [CurrencyController::class, 'getcurrency']);
+Route::post('/compare/{name}', [CurrencyController::class, 'compare']);
 
 //Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
 	Route::post('/me', [LoginController::class, 'me']);
     Route::post('/currencies', [CurrencyController::class, 'store']);
+    Route::post('/addprice/{id}', [PriceController::class, 'getadmincurrency']);
     Route::put('/currencies/{id}', [CurrencyController::class, 'update']);
     Route::delete('/currencies/{id}', [CurrencyController::class, 'destroy']);
 

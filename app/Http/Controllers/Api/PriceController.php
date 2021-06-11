@@ -17,9 +17,11 @@ class PriceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getadmincurrency($id)
     {
-        //
+        $currency = Currency::find($id);
+
+        return response()->json($currency);
     }
 
     /**
@@ -31,7 +33,9 @@ class PriceController extends Controller
     public function store(Request $request)
     {
 
-        $currency = Currency::create(
+        $date = Carbon::createFromDate($request['date']);
+        
+        $price = Price::create(
             [
             'price' => $request['price'],
 
@@ -41,7 +45,11 @@ class PriceController extends Controller
             ]
         );
 
-        return response()->json($currency); //json
+        $currency = Currency::find($price->currency_id);
+
+        $currency->update(['current_value' => $price->price, 'date' => $price->date]);
+
+        return response()->json($price); //json
     }
 
     /**

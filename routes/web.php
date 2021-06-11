@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/compare/{id}', [HomeController::class, 'compare']);
 Route::get('/admin', [HomeController::class, 'admin']);
 Route::get('/upload', [HomeController::class, 'upload']);
-Route::get('/add-price/{id}', [HomeController::class, 'addprice']);
-Route::get('/chart', [HomeController::class, 'chart']);
+Route::get('/addprice/{id}', [HomeController::class, 'addprice']);
 Route::get('/register', [RegisterController::class, 'index']);
 Route::get('/login', [LoginController::class, 'index']);

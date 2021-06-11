@@ -16,9 +16,11 @@ class CreateCurrenciesTable extends Migration
         Schema::create('currencies', function (Blueprint $table) {
             $table->id('id');
             $table->string('country');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('iso_code')->unique();
-            $table->json('values')->nullable(); /*--------- Array of Price Values--*/
+            $table->date('date')->nullable();
+            $table->double('current_value')->nullable(); /*--------- Current Price Value--*/
             $table->double('pair_value')->nullable();
             $table->timestamps();
         });

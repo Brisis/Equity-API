@@ -45,6 +45,6 @@ class User extends Authenticatable
 
     public function currencies()
     {
-        return $this->hasOne(Currency::class);
+        return $this->hasMany(Currency::class);
     }
 }

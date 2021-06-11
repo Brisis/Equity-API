@@ -11,17 +11,15 @@ class Currency extends Model
     protected $fillable = [
     	'country',
     	'iso_code',
-        'user_id'
+        'user_id',
+        'date',
+        'current_value'
     ];
 
     /*Array of Price Values*/
 
-    protected $casts = [
-        'values' => 'array'
-    ];
-
     public function prices()
     {
-        return $this->hasOne(Price::class);
+        return $this->hasMany(Price::class);
     }
 }

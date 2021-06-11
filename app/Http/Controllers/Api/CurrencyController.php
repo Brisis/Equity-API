@@ -107,16 +107,53 @@ class CurrencyController extends Controller
 
         $currencies = Currency::all();
 
-        $value = $currency[0]->value;
+        $value = $currency[0]->current_value;
 
         $paired = [];
 
         foreach ($currencies as $curr) {
-            $number = ($curr->value) / $value;
+            $number = ($curr->current_value) / $value;
             $curr->pair_value = round($number, 4);
             $paired[] = $curr;
         }
 
         return response()->json($paired);
     }
+
+    public function getcurrency($id)
+    {
+        $currency = Currency::find($id);
+
+        $prices = $currency->prices;
+
+        $data = [];
+
+        foreach ($prices as $price) {
+            $data[] = $price->price;
+        }
+
+        return response()->json([
+            "name" => $currency->iso_code,
+            "data" => $data
+        ]);
+    }
+
+    public function compare($name)
+    {
+        $currency = Currency::where('iso_code', $name)->get();
+
+        $prices = $currency[0]->prices;
+
+        $data = [];
+
+        foreach ($prices as $price) {
+            $data[] = $price->price;
+        }
+
+        return response()->json([
+            "name" => $currency[0]->iso_code,
+            "data" => $data
+        ]);
+    }
+
 }
